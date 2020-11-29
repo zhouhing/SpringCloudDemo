@@ -25,4 +25,4 @@
 使用网关可以隐蔽所有为微服务相关的真是信息，用户端可以只通过网关就能调用到注册中心中的任何微服务
 
 # 微服务完整结构
-![微服务整体架构](https://spring.io/images/diagram-microservices-88e01c7d34c688cb49556435c130d352.svg)
+![微服务整体架构](https://github.com/zhouhing/Image/blob/main/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.svg)

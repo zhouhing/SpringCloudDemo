@@ -1,0 +1,23 @@
+server:
+  port: 80 #网页访问默认的端口，前端访问不需要添加端口号
+
+spring:
+  application:
+    name: client_FeignConsumer
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eurekaserver01:6001/eureka/
+    register-with-eureka: false
+  instance:
+    hostname: client_FeignConsumer
+    instance-id: client_FeignConsumer:80
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 1 # 每间隔1s，向服务端发送一次心跳，证明自己依然”存活“
+    lease-expiration-duration-in-seconds: 2 #告诉服务端，如果我2s之内没有给你发心跳，就代表我“死”了，将我踢出掉。
+
+
+feign:
+  hystrix:
+    enabled: true # 开启服务降级

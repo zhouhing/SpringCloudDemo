@@ -1,0 +1,69 @@
+spring:
+  profiles: config01 # 代表不同的启动配置
+  application:
+    name: UserHystrix # 该服务的名称 Application
+  datasource:
+    name: user_database
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/demo1?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+server:
+  port: 8081
+logging.level.com.client.dao: debug
+
+mybatis:
+  mapper-locations: classpath:mapper/*Dao.xml
+
+# eureka服务中心注册
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eurekaserver01:6001/eureka/
+  instance:
+    lease-renewal-interval-in-seconds: 1 # 每间隔1s，向服务端发送一次心跳，证明自己依然”存活“
+    lease-expiration-duration-in-seconds: 2 #告诉服务端，如果我2s之内没有给你发心跳，就代表我“死”了，将我踢出掉。
+    prefer-ip-address: true # 以本机IP地址注册到eureka中，为默认为false则注册主机名
+    hostname: server_user_hystrix
+    instance-id: server_user_hystrix:8081 # 该服务的实例信息
+
+# 提供微服务的说明信息
+info:
+  appname: server_user_hystrix
+
+
+--- ## yml文件的分页符
+logging.level.com.client.dao: debug
+spring:
+  profiles: config02 # 代表不同的启动配置
+  application:
+    name: UserHystrix # 该服务的名称 Application
+  datasource:
+    name: user_database
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/demo1?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+server:
+  port: 8088
+
+mybatis:
+  mapper-locations: classpath:mapper/*Dao.xml
+
+# eureka服务中心注册
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eurekaserver01:6001/eureka/
+  instance:
+    lease-renewal-interval-in-seconds: 1 # 每间隔1s，向服务端发送一次心跳，证明自己依然”存活“
+    lease-expiration-duration-in-seconds: 2 #告诉服务端，如果我2s之内没有给你发心跳，就代表我“死”了，将我踢出掉。
+    prefer-ip-address: true # 以本机IP地址注册到eureka中，为默认为false则注册主机名
+    hostname: server_user_hystrix
+    instance-id: server_user_hystrix:8088 # 该服务的实例信息
+
+# 提供微服务的说明信息
+info:
+  appname: server_user_hystrix

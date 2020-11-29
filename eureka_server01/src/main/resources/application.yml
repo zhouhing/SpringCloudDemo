@@ -1,0 +1,22 @@
+server:
+  port: 6001
+
+spring:
+  application:
+    name: eureka01
+
+eureka:
+  instance:
+    hostname: eurekaserver01
+    lease-renewal-interval-in-seconds: 1 # 每间隔1s，向其他服务端节点发送一次心跳，证明自己依然”存活“。
+    lease-expiration-duration-in-seconds: 2 # 告诉其他节点服务端，如果我2s之内没有给你发心跳，就代表我“死”了，将我踢出掉。
+  server:
+    enable-self-preservation: false # 关闭自我保护，能随时剔除不可用的服务
+    eviction-interval-timer-in-ms: 4000 # （代表是1秒，单位是毫秒,清理失效服务的间隔 ）
+  client:
+    register-with-eureka: false # 是否将自己注册到Eureka服务中，本身就是所有无需注册
+    fetch-registry: false # 是否将自己注册到Eureka服务中，本身就是所有无需注册
+    service-url:
+      defaultZone: http://eurekaserver02:6002/eureka/,http://eurekaserver03:6003/eureka/
+    healthcheck:
+      enabled: true

@@ -1,0 +1,30 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: Product # 该服务的名称 Application
+  datasource:
+    name: product_database
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/demo1?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapper/*Dao.xml
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eurekaserver01:6001/eureka/
+  instance:
+    hostname: server_product
+    instance-id: server_product:8088
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 1 # 每间隔1s，向服务端发送一次心跳，证明自己依然”存活“
+    lease-expiration-duration-in-seconds: 2 #告诉服务端，如果我2s之内没有给你发心跳，就代表我“死”了，将我踢出掉。
+
+# 提供微服务的说明信息
+info:
+  appname: server_product

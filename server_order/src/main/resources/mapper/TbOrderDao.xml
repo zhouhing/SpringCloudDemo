@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.client.dao.TbOrderDao">
+  <resultMap id="BaseResultMap" type="com.serverOrder.entity.TbOrder">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, product_id, `number`, price, amount, product_name, username
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.serverOrder.entity.TbOrder" useGeneratedKeys="true">
+    insert into tb_order (user_id, product_id, `number`, 
+      price, amount, product_name, 
+      username)
+    values (#{userId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, 
+      #{price,jdbcType=DECIMAL}, #{amount,jdbcType=DECIMAL}, #{productName,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.serverOrder.entity.TbOrder" useGeneratedKeys="true">
+    insert into tb_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="number != null">
+        `number`,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.serverOrder.entity.TbOrder">
+    update tb_order
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        `number` = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.serverOrder.entity.TbOrder">
+    update tb_order
+    set user_id = #{userId,jdbcType=INTEGER},
+      product_id = #{productId,jdbcType=INTEGER},
+      `number` = #{number,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      amount = #{amount,jdbcType=DECIMAL},
+      product_name = #{productName,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,8 @@
+# 系统级别的配置，类比java中的（bootstrap classloader）根加载器
+spring:
+  cloud:
+    config:
+      label: master # 从哪一个分支拿配置文件
+      uri:  http://localhost:8888
+      name: application-eureka-server # 需要从远程仓库中读取到的文件信息
+#      profile: # 多文档代码快中，要激活的环境

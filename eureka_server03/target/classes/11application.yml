@@ -1,0 +1,15 @@
+server:
+  port: 6003
+
+spring:
+  application:
+    name: eureka03
+
+eureka:
+  instance:
+    hostname: eurekaserver03
+  client:
+    register-with-eureka: false # 是否将自己注册到Eureka服务中，本身就是所有无需注册
+    fetch-registry: false # 是否将自己注册到Eureka服务中，本身就是所有无需注册
+    service-url:
+      defaultZone: http://eurekaserver01:6001/eureka/,http://eurekaserver02:6002/eureka/
